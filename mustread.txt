@@ -1,0 +1,13 @@
+Solving MySQL problem
+
+According to the official documentation, you can solve this quite easily.
+
+Add following code to AppServiceProvider.php (/app/Providers/AppServiceProvider.php)
+
+use Illuminate\Support\Facades\Schema; //NEW: Import Schema
+
+function boot()
+{
+    Schema::defaultStringLength(191); //NEW: Increase StringLength
+}
+MySQL reserves always the max amount for a UTF8 field which is 4 bytes so with 255 + 255 with your DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; you are over the 767 max key length limit. By @scaisedge
